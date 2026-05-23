@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arkadians Inventory</title>
+  <link rel="stylesheet" href="./styles.css?v=3" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Arkadians Inventory</h1>
+      <p>Live stock list. Status is role-aware (admin vs user).</p>
+    </header>
+
+    <section class="summary-grid" id="summaryCards"></section>
+
+    <section class="panel" id="permissionsNotice"></section>
+
+    <section class="panel" id="editorPanel">
+      <h2>Update flat status</h2>
+      <form id="unitForm" class="form-grid">
+        <input type="hidden" id="id" />
+
+        <label>
+          Tower
+          <input id="tower" required />
+        </label>
+
+        <label>
+          Flat Number
+          <input id="flatNumber" required />
+        </label>
+
+        <label class="main-category">
+          View Category
+          <select id="viewCategory" required>
+            <option value="Golf View">Golf View</option>
+            <option value="Arabian Sea View">Arabian Sea View</option>
+            <option value="Other View">Other View</option>
+          </select>
+        </label>
+
+        <label>
+          Size / Sq Ft
+          <input id="sizeSqft" type="number" min="0" required />
+        </label>
+
+        <label>
+          Type
+          <select id="type" required>
+            <option value="4 Room">4 Room</option>
+            <option value="5 Room">5 Room</option>
+            <option value="Duplex">Duplex</option>
+            <option value="Economy">Economy</option>
+          </select>
+        </label>
+
+        <label>
+          Price
+          <input id="price" type="number" min="0" required />
+        </label>
+
+        <label>
+          Status
+          <select id="status" required>
+            <option value="available">Available</option>
+            <option value="interested">Interested</option>
+            <option value="viewing">Viewing</option>
+            <option value="deposit_secured">Deposit Secured</option>
+            <option value="payment_secured">Payment Secured</option>
+            <option value="sold_assigned">Sold / Assigned</option>
+          </select>
+        </label>
+
+        <label>
+          Customer / Lead Name
+          <input id="customerName" />
+        </label>
+
+        <label class="full-width">
+          Notes
+          <textarea id="notes" rows="3"></textarea>
+        </label>
+
+        <div class="actions full-width">
+          <button type="submit">Save Flat</button>
+          <button type="button" id="resetBtn" class="secondary">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Filters</h2>
+      <div class="filters">
+        <label class="main-category">
+          View Category
+          <select id="filterViewCategory"></select>
+        </label>
+
+        <label>
+          Tower
+          <select id="filterTower"></select>
+        </label>
+
+        <label>
+          Status
+          <select id="filterStatus"></select>
+        </label>
+
+        <label>
+          Type
+          <select id="filterType"></select>
+        </label>
+
+        <label>
+          Search Flat Number
+          <input id="filterFlatNumber" placeholder="e.g. A-1203" />
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Inventory List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Flat No</th>
+            <th>Tower</th>
+            <th>View Category</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Customer</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="./app.js?v=3"></script>
+
+</body>
+</html>

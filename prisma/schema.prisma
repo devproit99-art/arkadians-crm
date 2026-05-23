@@ -1,0 +1,323 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+
+}
+
+enum LeadSource {
+  website_voice
+  website_form
+  website_game
+  phone
+  referral
+  broker
+  walk_in
+  social_media
+}
+
+enum LeadStatus {
+  new
+  contacted
+  viewing_booked
+  negotiating
+  closed_won
+  closed_lost
+}
+
+enum UnitType {
+  two_bed
+  three_bed
+  three_bed_large
+  four_bed_duplex
+  penthouse
+}
+
+enum ViewPreference {
+  sea
+  golf
+  city
+  dual
+}
+
+enum Urgency {
+  low
+  medium
+  high
+  immediate
+}
+
+enum CallDirection {
+  inbound
+  outbound
+}
+
+// Vapi call logging; uppercase members for webhook / external parity.
+enum CallLogDirection {
+  INBOUND
+  OUTBOUND
+  BROWSER_TEST
+}
+
+enum Sentiment {
+  positive
+  neutral
+  negative
+}
+
+enum ActivityType {
+  task
+  call
+  email
+  whatsapp
+  viewing
+  meeting
+  note
+  follow_up
+}
+
+enum ActivityStatus {
+  pending
+  in_progress
+  completed
+  cancelled
+}
+
+enum Priority {
+  low
+  medium
+  high
+  urgent
+}
+
+enum UserRole {
+  admin
+  ceo
+  manager
+  sales_rep
+  viewer
+}
+
+enum UserStatus {
+  active
+  inactive
+  suspended
+}
+
+enum AIOutputType {
+  summary
+  score
+  follow_up_whatsapp
+  follow_up_email
+  recommendation
+  call_analysis
+}
+
+enum Lifestyle {
+  family
+  professional
+  investor
+  retiree
+  luxury_seeker
+}
+
+enum InventoryStatus {
+  available
+  interested
+  viewing
+  deposit_secured
+  payment_secured
+  sold_assigned
+}
+
+model User {
+  id           String     @id @default(uuid())
+  name         String
+  email        String     @unique
+  passwordHash String     @map("password_hash")
+  role         UserRole
+  avatarUrl    String?    @map("avatar_url")
+  status       UserStatus @default(active)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  leads      Lead[]
+  activities Activity[]
+
+  @@map("users")
+}
+
+model Lead {
+  id             String          @id @default(uuid())
+  name           String
+  phone          String?
+  email          String?
+  source         LeadSource
+  status         LeadStatus      @default(new)
+  budgetMin      BigInt?         @map("budget_min")
+  budgetMax      BigInt?         @map("budget_max")
+  preferredUnit  UnitType?       @map("preferred_unit")
+  preferredView  ViewPreference? @map("preferred_view")
+  preferredTower String?         @map("preferred_tower") @db.VarChar(10)
+  urgency        Urgency         @default(medium)
+  language       String          @default("en") @db.VarChar(10)
+  score          Int             @default(0)
+  notes          String?
+  lostReason     String?         @map("lost_reason")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  deletedAt      DateTime?       @map("deleted_at")
+
+  // Last Vapi (or telephony) interaction; optional denormalization for UI.
+  lastCallAt DateTime? @map("last_call_at")
+
+  ownerId String? @map("owner_id")
+  owner   User?   @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+
+  calls     Call[]
+  callLogs  CallLog[]
+  activities   Activity[]
+  gameSessions GameSession[]
+  aiOutputs    AIOutput[]
+  inventoryUnits InventoryUnit[]
+
+  @@index([status])
+  @@index([score(sort: Desc)])
+  @@index([ownerId])
+  @@index([createdAt(sort: Desc)])
+  @@map("leads")
+}
+
+model InventoryUnit {
+  id           String          @id @default(uuid())
+  tower        String
+  flatNumber   String          @unique @map("flat_number")
+  sizeSqft     Int             @map("size_sqft")
+  type         String
+  viewCategory String          @map("view_category")
+  price        BigInt
+  status       InventoryStatus @default(available)
+  customerName String?         @map("customer_name")
+  notes        String?
+
+  leadId     String?   @map("lead_id")
+  lead       Lead?     @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  statusAt   DateTime  @default(now()) @map("status_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([tower])
+  @@index([viewCategory])
+  @@index([leadId])
+  @@map("inventory_units")
+}
+
+model Call {
+  id              String        @id @default(uuid())
+  vapiCallId      String?       @unique @map("vapi_call_id")
+  direction       CallDirection @default(inbound)
+  transcript      String?
+  summary         String?
+  sentiment       Sentiment?
+  durationSeconds Int?          @map("duration_seconds")
+  recordingUrl    String?       @map("recording_url")
+  callerPhone     String?       @map("caller_phone")
+  metadata        Json          @default("{}")
+  createdAt       DateTime      @default(now()) @map("created_at")
+
+  leadId String @map("lead_id")
+  lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, createdAt(sort: Desc)])
+  @@map("calls")
+}
+
+model CallLog {
+  id                String           @id @default(uuid())
+  leadId            String           @map("lead_id")
+  vapiCallId        String?          @unique @map("vapi_call_id")
+  direction         CallLogDirection
+  status            String           @default("pending") @db.VarChar(100)
+  outcome           String?          @db.VarChar(500)
+  summary           String?          @db.Text
+  transcript        String?          @db.Text
+  durationSeconds   Int?             @map("duration_seconds")
+  recordingUrl      String?          @map("recording_url")
+  transferred       Boolean          @default(false)
+  startedAt         DateTime?        @map("started_at")
+  endedAt           DateTime?        @map("ended_at")
+  createdAt    DateTime         @default(now()) @map("created_at")
+  updatedAt    DateTime         @updatedAt @map("updated_at")
+
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, startedAt(sort: Desc)])
+  @@index([leadId, createdAt(sort: Desc)])
+  @@map("call_logs")
+}
+
+model Activity {
+  id          String         @id @default(uuid())
+  type        ActivityType
+  title       String
+  notes       String?
+  dueAt       DateTime?      @map("due_at")
+  completedAt DateTime?      @map("completed_at")
+  status      ActivityStatus @default(pending)
+  priority    Priority       @default(medium)
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+
+  leadId String @map("lead_id")
+  lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  userId String? @map("user_id")
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([leadId, dueAt])
+  @@index([userId, dueAt])
+  @@map("activities")
+}
+
+model GameSession {
+  id                String         @id @default(uuid())
+  visitorName       String?        @map("visitor_name")
+  visitorPhone      String?        @map("visitor_phone")
+  visitorEmail      String?        @map("visitor_email")
+  lifestyle         Lifestyle?
+  unitType          UnitType?      @map("unit_type")
+  viewPreference    ViewPreference? @map("view_preference")
+  budgetRange       String?        @map("budget_range") @db.VarChar(100)
+  amenityPriorities Json           @default("[]") @map("amenity_priorities")
+  aiRecommendation  String?        @map("ai_recommendation")
+  score             Int            @default(0)
+  completed         Boolean        @default(false)
+  createdAt         DateTime       @default(now()) @map("created_at")
+
+  leadId String? @map("lead_id")
+  lead   Lead?   @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  @@index([leadId])
+  @@map("game_sessions")
+}
+
+model AIOutput {
+  id            String      @id @default(uuid())
+  type          AIOutputType
+  promptVersion String?     @map("prompt_version") @db.VarChar(50)
+  inputContext  Json?       @map("input_context")
+  output        String
+  model         String      @default("claude-sonnet-4-20250514") @db.VarChar(100)
+  tokensUsed    Int?        @map("tokens_used")
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  leadId String @map("lead_id")
+  lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, type, createdAt(sort: Desc)])
+  @@map("ai_outputs")
+}
+

@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F5F3EE;
+  --foreground: #0A1628;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-arkadians-sans);
+  --font-mono: var(--font-arkadians-mono);
+  --font-display: var(--font-arkadians-display);
+}
+
+@theme {
+  /* Brand colors */
+  --color-navy: #0A1628;
+  --color-navy-light: #0F2035;
+  --color-navy-dark: #060E1A;
+
+  --color-gold: #C9A84C;
+  --color-gold-dark: #A6862E;
+  --color-gold-light: #D4B76A;
+
+  --color-cream: #F5F3EE;
+  --color-white: #FFFFFF;
+
+  --color-medium-grey: #4A5568;
+  --color-light-grey: #E2E8F0;
+  --color-lightest-grey: #F7FAFC;
+
+  --color-success: #48BB78;
+  --color-warning: #ED8936;
+  --color-error: #F56565;
+  --color-purple: #805AD5;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(10, 22, 40, 0.08);
+  --shadow-card-hover: 0 4px 12px rgba(10, 22, 40, 0.12);
+  --shadow-gold: 0 0 20px rgba(201, 168, 76, 0.15);
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-gold {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201, 168, 76, 0);
+  }
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-navy);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Premium scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-navy) 15%, transparent);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--color-navy) 24%, transparent);
+}
+
+/* CEO executive surfaces — subtle entrance (respect reduced motion below) */
+@keyframes ceo-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ceo-rise-motion {
+  animation: ceo-rise 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ceo-card-hover {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease;
+}
+
+.ceo-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: color-mix(in oklab, var(--color-gold) 35%, var(--color-light-grey));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ceo-rise-motion {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ceo-card-hover:hover {
+    transform: none;
+  }
+}
