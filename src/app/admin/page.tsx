@@ -109,7 +109,7 @@ export default async function AdminPage() {
     prisma.activity.count({}),
   ]);
 
-  const leadRows: AdminLeadRow[] = leads.map((l) => ({
+  const leadRows: AdminLeadRow[] = leads.map((l: any) => ({
     id: l.id,
     name: l.name,
     status: l.status,
@@ -461,4 +461,5 @@ export default async function AdminPage() {
     </div>
   );
 }
+
 
