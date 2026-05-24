@@ -138,7 +138,7 @@ export default async function AdminPage() {
   }));
 
   const activityRows: (AdminActivityRow & { leadName?: string | null; userName?: string | null })[] = activities.map(
-    (a) => ({
+    (a: any) => ({
       id: a.id,
       leadId: a.leadId,
       title: a.title,
@@ -165,7 +165,7 @@ export default async function AdminPage() {
   const hotProspects = leadRows.filter((l) => l.score >= 75).length;
   const pipelineValuePkr = leadRows.reduce((acc, l) => acc + getLeadBudgetValuePkr(l), BigInt(0));
   const projectedRevenuePkr = (pipelineValuePkr * BigInt(3)) / BigInt(100); // 3% projected
-  const followUpsDue = activityRows.filter((a) => a.status === "pending").length;
+  const followUpsDue = activityRows.filter((a: any) => a.status === "pending").length;
   const viewingsBooked = leadRows.filter((l) => l.status === "viewing_booked").length;
   const aiCallsLogged = callLogRows.length;
 
@@ -262,7 +262,7 @@ export default async function AdminPage() {
 
   const aiBrowserCompleted = callLogRows.filter((c) => c.status === "browser_test_completed").length;
   const transcriptsSaved = callLogRows.filter((c) => (c.transcript?.trim() ?? "").length > 0).length;
-  const callbackTasksCreated = activityRows.filter((a) => a.type === "follow_up").length;
+  const callbackTasksCreated = activityRows.filter((a: any) => a.type === "follow_up").length;
   const hotLeadsIdentified = hotProspects;
   const draftsDemo = Math.min(hotProspects, 12);
 
@@ -308,7 +308,7 @@ export default async function AdminPage() {
       const pipeline = ownedLeads.reduce((acc, l) => acc + getLeadBudgetValuePkr(l), BigInt(0));
       const hotCount = ownedLeads.filter((l) => l.score >= 75).length;
       const viewings = ownedLeads.filter((l) => l.status === "viewing_booked").length;
-      const due = ownedActs.filter((a) => a.status === "pending").length;
+      const due = ownedActs.filter((a: any) => a.status === "pending").length;
       const completed = 0;
       const badge = performanceBadge({
         pipelineValuePkr: pipeline,
@@ -461,5 +461,6 @@ export default async function AdminPage() {
     </div>
   );
 }
+
 
 
