@@ -35,9 +35,9 @@ export async function GET(req: NextRequest) {
     const overdue = searchParams.get("overdue") === "true";
 
     const statusParam = searchParams.get("status");
-    const status: ActivityStatus | undefined =
-      statusParam && (Object.values(ActivityStatus) as string[]).includes(statusParam)
-        ? (statusParam as ActivityStatus)
+    const status: string | undefined =
+      statusParam && (['pending','in_progress','completed','cancelled']).includes(statusParam)
+        ? (statusParam)
         : undefined;
 
     const typeParam = searchParams.get("type");
