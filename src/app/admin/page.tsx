@@ -284,7 +284,7 @@ export default async function AdminPage() {
 
   const activitiesByAdvisor = new Map<string, AdminActivityRow[]>();
   for (const a of activityRows) {
-    const advisor = a.userId && userById.get(a.userId)?.name ? userById.get(a.userId)!.name : stableAdvisorForLead({ id: a.leadId, ownerId: null, ownerName: null }).advisorName;
+    const advisor = a.userId && (userById.get(a.userId) as any)?.name ? (userById.get(a.userId) as any)!.name : stableAdvisorForLead({ id: a.leadId, ownerId: null, ownerName: null }).advisorName;
     const arr = activitiesByAdvisor.get(advisor) ?? [];
     arr.push(a);
     activitiesByAdvisor.set(advisor, arr);
@@ -461,6 +461,7 @@ export default async function AdminPage() {
     </div>
   );
 }
+
 
 
 
