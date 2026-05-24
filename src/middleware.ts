@@ -94,3 +94,4 @@ export const config = {
     "/((?!_next/static|_next/image|favicon.ico|arkadians-game|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4|html)$).*)",
   ],
 };
+

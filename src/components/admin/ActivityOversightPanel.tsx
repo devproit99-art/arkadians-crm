@@ -79,7 +79,7 @@ export function ActivityOversightPanel() {
               <div className="mt-3 text-sm text-medium-grey">No staff activity found for today.</div>
             ) : (
               <ul className="mt-3 space-y-2">
-                {staff.map((r) => {
+                {staff.map((r: any) => {
                   const tone = r.missed >= 2 ? "bad" : r.missed === 1 ? "warn" : "ok";
                   return (
                     <li key={r.userId} className="rounded-lg border border-light-grey bg-white p-3">
@@ -108,7 +108,7 @@ export function ActivityOversightPanel() {
               <div className="mt-3 text-sm text-medium-grey">No missed items so far.</div>
             ) : (
               <ul className="mt-3 space-y-2">
-                {missed.map((m) => (
+                {missed.map((m: any) => (
                   <li key={m.id} className="rounded-lg border border-light-grey bg-white p-3">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div className="min-w-0">
@@ -137,4 +137,5 @@ export function ActivityOversightPanel() {
     </section>
   );
 }
+
 

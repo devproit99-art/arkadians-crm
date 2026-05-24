@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json({
-      data: rows.map((a) => ({
+      data: rows.map((a: any) => ({
         id: a.id,
         leadId: a.leadId,
         leadName: a.lead.name,
@@ -92,4 +92,5 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
 

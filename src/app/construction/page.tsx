@@ -27,7 +27,7 @@ export default function ConstructionPage() {
 
         <div className="mt-8 rounded-xl border border-light-grey bg-white shadow-card p-6">
           <div className="relative pl-6 border-l border-gold space-y-6">
-            {milestones.map((m) => (
+            {milestones.map((m: any) => (
               <div key={m.phase} className="relative">
                 <div
                   className={[
@@ -60,4 +60,5 @@ export default function ConstructionPage() {
     </div>
   );
 }
+
 

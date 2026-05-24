@@ -78,7 +78,7 @@ function OptionGrid({
 }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {options.map((o) => {
+      {options.map((o: any) => {
         const isSelected = selected === o.title;
         return (
           <button
@@ -411,4 +411,5 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     </label>
   );
 }
+
 

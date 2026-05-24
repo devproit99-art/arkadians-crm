@@ -32,3 +32,4 @@ export function scoreBadgeClasses(score: number) {
   return "bg-light-grey text-navy";
 }
 
+

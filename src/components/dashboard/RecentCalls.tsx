@@ -22,7 +22,7 @@ function sentimentPill(sentiment: RecentCall["sentiment"]) {
 }
 
 export function RecentCalls({ calls }: { calls: DemoCall[] }) {
-  const items: RecentCall[] = calls.map((c) => ({
+  const items: RecentCall[] = calls.map((c: any) => ({
     id: c.id,
     name: c.leadName,
     duration: c.duration,
@@ -76,4 +76,5 @@ export function RecentCalls({ calls }: { calls: DemoCall[] }) {
     </section>
   );
 }
+
 

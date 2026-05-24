@@ -48,7 +48,7 @@ function filterAndPaginateDemoLeads(
   limit: number,
 ) {
   const skip = (page - 1) * limit;
-  const filtered = demoLeads.filter((l) => {
+  const filtered = demoLeads.filter((l: any) => {
     if (status && l.status !== status) return false;
     if (search && !l.name.toLowerCase().includes(search.toLowerCase())) return false;
     const min = scoreMin ? Number(scoreMin) : undefined;
@@ -184,7 +184,7 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json({
-      data: leads.map((l) => {
+      data: leads.map((l: any) => {
         const inventory = parseInventoryTracking(l.notes);
         return {
           id: l.id,
@@ -323,4 +323,5 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
 

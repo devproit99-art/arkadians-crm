@@ -141,7 +141,7 @@ export const demoLeads: DemoLead[] = [
   },
 ];
 
-export const demoPipelineLeads: PipelineLead[] = demoLeads.map((l) => ({
+export const demoPipelineLeads: PipelineLead[] = demoLeads.map((l: any) => ({
   id: l.id,
   name: l.name,
   score: l.score,
@@ -226,6 +226,7 @@ export const demoActivities: DemoActivity[] = [
 ];
 
 export function getLeadById(id: string) {
-  return demoLeads.find((l) => l.id === id) ?? null;
+  return demoLeads.find((l: any) => l.id === id) ?? null;
 }
+
 

@@ -184,7 +184,7 @@ export function CeoPipelineStackedStrip({ counts }: { counts: PipelineCountsPlai
                 cursor={{ fill: "rgba(201,168,76,0.06)" }}
                 contentStyle={{ borderRadius: 12, borderColor: "rgba(10,22,40,0.10)" }}
               />
-              {keys.map((k) => (
+              {keys.map((k: any) => (
                 <Bar
                   key={k.key}
                   stackId="mix"
@@ -199,7 +199,7 @@ export function CeoPipelineStackedStrip({ counts }: { counts: PipelineCountsPlai
           </ResponsiveContainer>
         </div>
         <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-medium-grey">
-          {keys.map((k) => (
+          {keys.map((k: any) => (
             <span key={k.key} className="inline-flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-sm" style={{ background: k.fill }} aria-hidden />
               {k.label}: <span className="font-medium text-navy tabular-nums">{row[k.key]}</span>
@@ -210,3 +210,4 @@ export function CeoPipelineStackedStrip({ counts }: { counts: PipelineCountsPlai
     </section>
   );
 }
+

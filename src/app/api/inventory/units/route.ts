@@ -155,7 +155,7 @@ export async function GET(req: Request) {
     take: effectiveScope === "admin" ? 2000 : 800,
   });
 
-  const data = rows.map((u) => ({
+  const data = rows.map((u: any) => ({
     id: u.id,
     tower: u.tower,
     flatNumber: u.flatNumber,
@@ -269,4 +269,5 @@ export async function POST(req: Request) {
     );
   }
 }
+
 

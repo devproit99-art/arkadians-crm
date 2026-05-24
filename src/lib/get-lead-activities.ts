@@ -22,9 +22,9 @@ export async function getRecentActivitiesForLead(
 ): Promise<LeadActivityRow[]> {
   if (!hasDatabase()) {
     return demoActivities
-      .filter((a) => a.leadId === leadId)
+      .filter((a: any) => a.leadId === leadId)
       .slice(0, take)
-      .map((a) => ({
+      .map((a: any) => ({
         id: a.id,
         type: a.type.replaceAll("_", " "),
         title: a.title,
@@ -48,7 +48,7 @@ export async function getRecentActivitiesForLead(
     },
   });
 
-  return rows.map((r) => ({
+  return rows.map((r: any) => ({
     id: r.id,
     type: r.type.replaceAll("_", " "),
     title: r.title,
@@ -57,3 +57,4 @@ export async function getRecentActivitiesForLead(
     dueLabel: r.dueAt ? formatDateTime(r.dueAt) : null,
   }));
 }
+

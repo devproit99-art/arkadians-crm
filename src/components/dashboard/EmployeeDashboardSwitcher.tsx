@@ -42,7 +42,7 @@ export function EmployeeDashboardSwitcher({
         }}
         className="h-10 rounded-xl border border-light-grey bg-white px-3 text-xs font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-gold/40"
       >
-        {items.map((u) => (
+        {items.map((u: any) => (
           <option key={u.id} value={u.id}>
             {u.name}
           </option>
@@ -51,4 +51,5 @@ export function EmployeeDashboardSwitcher({
     </div>
   );
 }
+
 

@@ -60,7 +60,7 @@ export function DashboardHero({ updatedLabel }: { updatedLabel: string }) {
 export function KpiGrid({ kpis }: { kpis: AdminDashboardClientProps["kpis"] }) {
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {kpis.map((k) => (
+      {kpis.map((k: any) => (
         <div key={k.title} className="rounded-xl border border-light-grey bg-white shadow-card p-5 relative overflow-hidden">
           <div className="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-gold/10 blur-2xl" />
           <div className="text-xs tracking-[0.22em] uppercase text-medium-grey">{k.title}</div>
@@ -258,7 +258,7 @@ export function HotProspectsAndOpsSection({
                 </tr>
               </thead>
               <tbody className="text-navy">
-                {filteredHot.map((r) => (
+                {filteredHot.map((r: any) => (
                   <tr key={r.id} className="border-b border-light-grey/70">
                     <td className="py-3">
                       <Link href={`/leads/${r.id}`} className="font-semibold hover:text-gold transition-colors">
@@ -304,7 +304,7 @@ export function HotProspectsAndOpsSection({
             <p className="text-sm text-medium-grey">No follow-ups due.</p>
           ) : (
             <ul className="space-y-3">
-              {followUps.map((a) => (
+              {followUps.map((a: any) => (
                 <li key={a.id} className="rounded-lg border border-light-grey bg-cream/20 px-4 py-3">
                   <div className="text-xs uppercase tracking-wider text-medium-grey">{a.status}</div>
                   <div className="mt-1 text-sm font-semibold text-navy">{a.leadName}</div>
@@ -319,7 +319,7 @@ export function HotProspectsAndOpsSection({
 
         <Collapsible title="AI Operations" subtitle="System is operational" defaultOpen>
           <div className="grid grid-cols-2 gap-3 text-sm">
-            {aiOps.map((x) => (
+            {aiOps.map((x: any) => (
               <div key={x.k} className="rounded-lg border border-light-grey bg-cream/20 px-4 py-3">
                 <div className="text-xs text-medium-grey">{x.k}</div>
                 <div className="mt-1 font-(--font-display) text-xl text-navy">{x.v}</div>
@@ -333,7 +333,7 @@ export function HotProspectsAndOpsSection({
               "Callback times extracted",
               "Follow-up activity created",
               "WhatsApp/email drafting ready",
-            ].map((t) => (
+            ].map((t: any) => (
               <li key={t} className="flex gap-2">
                 <span className="text-gold">•</span>
                 <span>{t}</span>
@@ -362,7 +362,7 @@ export function BookingsSection({ bookings }: { bookings: AdminDashboardClientPr
             </tr>
           </thead>
           <tbody className="text-navy">
-            {bookings.map((r) => (
+            {bookings.map((r: any) => (
               <tr key={r.id} className="border-b border-light-grey/70">
                 <td className="py-3 font-semibold">{r.client}</td>
                 <td className="py-3">{r.interest}</td>
@@ -403,7 +403,7 @@ export function TeamAndAdvisorSection({
                 </tr>
               </thead>
               <tbody className="text-navy">
-                {team.map((r) => (
+                {team.map((r: any) => (
                   <tr key={r.name} className="border-b border-light-grey/70">
                     <td className="py-3 font-semibold">{r.name}</td>
                     <td className="py-3 text-medium-grey">{r.role}</td>
@@ -448,3 +448,4 @@ export function TeamAndAdvisorSection({
     </section>
   );
 }
+

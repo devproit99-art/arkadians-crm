@@ -29,7 +29,7 @@ export function CeoExecutiveFunnelChart({
   data: FunnelDatum[];
   className?: string;
 }) {
-  const max = Math.max(1, ...data.map((d) => d.count));
+  const max = Math.max(1, ...data.map((d: any) => d.count));
 
   return (
     <section
@@ -82,3 +82,4 @@ export function CeoExecutiveFunnelChart({
     </section>
   );
 }
+

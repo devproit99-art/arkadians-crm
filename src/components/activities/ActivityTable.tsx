@@ -19,7 +19,7 @@ function priorityClass(priority: DemoActivity["priority"]) {
 export function ActivityTable({ activities }: { activities: DemoActivity[] }) {
   const [activeId, setActiveId] = useState<string | null>(activities[0]?.id ?? null);
   const active = useMemo(
-    () => activities.find((a) => a.id === activeId) ?? null,
+    () => activities.find((a: any) => a.id === activeId) ?? null,
     [activities, activeId],
   );
 
@@ -153,4 +153,5 @@ export function ActivityTable({ activities }: { activities: DemoActivity[] }) {
     </div>
   );
 }
+
 

@@ -381,7 +381,7 @@ async function LeadDetailContent({
                 </p>
               ) : (
                 <ul className="mt-4 space-y-3">
-                  {callLogs.map((c) => (
+                  {callLogs.map((c: any) => (
                     <li
                       key={c.id}
                       className="rounded-lg border border-light-grey bg-cream/20 px-4 py-3 text-sm"
@@ -499,7 +499,7 @@ async function LeadDetailContent({
               </div>
             ) : (
               <ul className="mt-5 border-l border-gold pl-4 space-y-4">
-                {activities.map((a) => (
+                {activities.map((a: any) => (
                   <li key={a.id} className="relative">
                     <div className="absolute left-[-21px] top-1.5 w-2 h-2 rounded-full bg-gold shadow-gold" />
                     <div className="text-xs uppercase tracking-wider text-medium-grey">

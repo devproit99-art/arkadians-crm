@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
     if (!hasDatabase()) {
       const scored = [...demoLeads]
-        .map((l) => ({
+        .map((l: any) => ({
           ...l,
           score: scoreLead({
             status: l.status,
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    const leadIds = leads.map((l) => l.id);
+    const leadIds = leads.map((l: any) => l.id);
     const activities = await prisma.activity.findMany({
       where: {
         leadId: { in: leadIds },
@@ -85,7 +85,7 @@ export async function GET(req: NextRequest) {
     }
 
     const scored = leads
-      .map((l) => {
+      .map((l: any) => {
         const acts = byLead.get(l.id) ?? { next: null, latest: null };
         const res = scoreLead(
           {
@@ -144,3 +144,4 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+

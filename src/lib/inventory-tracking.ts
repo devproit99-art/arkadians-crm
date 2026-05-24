@@ -23,7 +23,7 @@ export function parseInventoryTracking(notes: string | null | undefined): Invent
   const text = (notes ?? "").trim();
   if (!text) return EMPTY;
 
-  const lines = text.split(/\r?\n/).map((l) => l.trim());
+  const lines = text.split(/\r?\n/).map((l: any) => l.trim());
 
   let flatNumber: string | null = null;
   let tower: string | null = null;
@@ -120,3 +120,4 @@ export function parseInventoryTracking(notes: string | null | undefined): Invent
     instalmentStatus: instalment ?? "Not started",
   };
 }
+

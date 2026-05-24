@@ -78,7 +78,7 @@ export function TargetGraph({
           </div>
 
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {tiers.map((t) => {
+            {tiers.map((t: any) => {
               const unlocked = pct >= t.thresholdPct;
               return (
                 <div
@@ -127,4 +127,5 @@ function formatPKR(value: number) {
   if (value >= lakh) return `PKR ${(value / lakh).toFixed(1)} lakh`;
   return `PKR ${Math.round(value).toLocaleString("en-PK")}`;
 }
+
 

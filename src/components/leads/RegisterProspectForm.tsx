@@ -235,7 +235,7 @@ export function RegisterProspectForm() {
   const fieldDisabled = saving || redirecting;
   const fieldClass =
     "mt-2 w-full rounded-lg border border-light-grey bg-white px-3 py-2 text-sm text-navy focus:outline-none focus:ring-2 focus:ring-gold/40 disabled:opacity-60 disabled:cursor-not-allowed";
-  const inventoryFiltered = inventoryUnits.filter((u) => {
+  const inventoryFiltered = inventoryUnits.filter((u: any) => {
     const q = inventoryFilter.trim().toLowerCase();
     if (!q) return true;
     return [u.flatNumber, u.tower, u.viewCategory, u.type].some((v) =>
@@ -342,7 +342,7 @@ export function RegisterProspectForm() {
                   name="prospectSource"
                   disabled={fieldDisabled}
                 >
-                  {SOURCES.map((s) => (
+                  {SOURCES.map((s: any) => (
                     <option key={s.value} value={s.value}>
                       {s.label}
                     </option>
@@ -359,7 +359,7 @@ export function RegisterProspectForm() {
                   name="prospectUrgency"
                   disabled={fieldDisabled}
                 >
-                  {URGENCY_OPTIONS.map((u) => (
+                  {URGENCY_OPTIONS.map((u: any) => (
                     <option key={u.value} value={u.value}>
                       {u.label}
                     </option>
@@ -400,7 +400,7 @@ export function RegisterProspectForm() {
                   name="prospectUnit"
                   disabled={fieldDisabled}
                 >
-                  {UNITS.map((u) => (
+                  {UNITS.map((u: any) => (
                     <option key={u.value === "" ? "__empty" : u.value} value={u.value}>
                       {u.label}
                     </option>
@@ -417,7 +417,7 @@ export function RegisterProspectForm() {
                   name="prospectView"
                   disabled={fieldDisabled}
                 >
-                  {VIEWS.map((v) => (
+                  {VIEWS.map((v: any) => (
                     <option key={v.value === "" ? "__empty" : v.value} value={v.value}>
                       {v.label}
                     </option>
@@ -537,7 +537,7 @@ export function RegisterProspectForm() {
                   <div className="p-4 text-sm text-medium-grey">No available flats found.</div>
                 ) : (
                   <ul className="divide-y divide-light-grey">
-                    {inventoryFiltered.slice(0, 200).map((u) => (
+                    {inventoryFiltered.slice(0, 200).map((u: any) => (
                       <li key={u.id} className="px-4 py-3 flex items-center justify-between gap-3">
                         <div className="min-w-0">
                           <div className="text-sm font-semibold text-navy">
@@ -585,3 +585,4 @@ export function RegisterProspectForm() {
     </div>
   );
 }
+

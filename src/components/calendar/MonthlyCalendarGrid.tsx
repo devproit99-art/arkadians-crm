@@ -178,7 +178,7 @@ export function MonthlyCalendarGrid(props: {
               className="h-10 rounded-xl border border-light-grey bg-white px-3 text-xs font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-gold/40"
             >
               <option value="">Overall / All staff</option>
-              {props.userOptions.map((u) => (
+              {props.userOptions.map((u: any) => (
                 <option key={u.id} value={u.id}>
                   {u.name}
                 </option>
@@ -211,7 +211,7 @@ export function MonthlyCalendarGrid(props: {
       </div>
 
       <div className="mt-5 grid grid-cols-7 gap-2 text-[11px] tracking-widest uppercase text-medium-grey">
-        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d: any) => (
           <div key={d} className="px-2 py-1">
             {d}
           </div>
@@ -219,7 +219,7 @@ export function MonthlyCalendarGrid(props: {
       </div>
 
       <div className="mt-2 grid grid-cols-7 gap-2">
-        {cells.map((c) => (
+        {cells.map((c: any) => (
           <div
             key={c.key}
             className={[
@@ -237,7 +237,7 @@ export function MonthlyCalendarGrid(props: {
             </div>
 
             <div className="mt-2 space-y-1.5">
-              {c.events.slice(0, 4).map((e) => {
+              {c.events.slice(0, 4).map((e: any) => {
                 const time = formatTime12(e.dueAt);
                 return (
                   <Link
@@ -267,4 +267,5 @@ export function MonthlyCalendarGrid(props: {
     </div>
   );
 }
+
 

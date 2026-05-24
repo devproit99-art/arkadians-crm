@@ -54,7 +54,7 @@ export default async function PipelinePage() {
     initialLeads.length === 0
       ? "empty"
       : initialLeads
-          .map((l) => l.id)
+          .map((l: any) => l.id)
           .sort()
           .join("|");
 
@@ -92,3 +92,4 @@ export default async function PipelinePage() {
     </div>
   );
 }
+

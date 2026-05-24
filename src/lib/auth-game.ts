@@ -46,3 +46,4 @@ export async function verifyGameSessionToken(token: string): Promise<GameSession
     return null;
   }
 }
+

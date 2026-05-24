@@ -72,3 +72,4 @@ export type AdminDashboardClientProps = {
   team: TeamRow[];
   advisorPipeline: { label: string; valueCrore: number }[];
 };
+

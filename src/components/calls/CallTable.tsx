@@ -14,7 +14,7 @@ export function CallTable({ calls }: { calls: DemoCall[] }) {
   const [openId, setOpenId] = useState<string | null>(calls[0]?.id ?? null);
 
   const openCall = useMemo(
-    () => calls.find((c) => c.id === openId) ?? null,
+    () => calls.find((c: any) => c.id === openId) ?? null,
     [calls, openId],
   );
 
@@ -121,4 +121,5 @@ export function CallTable({ calls }: { calls: DemoCall[] }) {
     </div>
   );
 }
+
 

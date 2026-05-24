@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
     const skip = (page - 1) * limit;
 
     if (!hasDatabase()) {
-      const filtered = demoCalls.filter((c) => {
+      const filtered = demoCalls.filter((c: any) => {
         if (leadId && c.leadId !== leadId) return false;
         if (sentiment && c.sentiment !== sentiment) return false;
         return true;
@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
     ]);
 
     return NextResponse.json({
-      data: calls.map((c) => ({
+      data: calls.map((c: any) => ({
         id: c.id,
         leadId: c.lead.id,
         leadName: c.lead.name,
@@ -101,4 +101,5 @@ function parseTranscript(
       return { speaker: "Caller" as const, text: line };
     });
 }
+
 

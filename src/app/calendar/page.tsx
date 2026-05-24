@@ -131,8 +131,8 @@ export default async function CalendarPage({
   ]);
 
   const list: Row[] = rows
-    .filter((r) => r.dueAt)
-    .map((r) => ({
+    .filter((r: any) => r.dueAt)
+    .map((r: any) => ({
       id: r.id,
       dueAt: r.dueAt!,
       type: r.type,
@@ -146,12 +146,12 @@ export default async function CalendarPage({
     }));
 
   const grouped = groupByDate(
-    list.filter((r) => r.dueAt >= now && r.dueAt <= upcomingEnd && r.status !== "completed"),
+    list.filter((r: any) => r.dueAt >= now && r.dueAt <= upcomingEnd && r.status !== "completed"),
   );
 
   const selectedName =
     isAdmin && selectedUserId
-      ? users.find((u) => u.id === selectedUserId)?.name ?? "All staff"
+      ? users.find((u: any) => u.id === selectedUserId)?.name ?? "All staff"
       : session.name;
 
   return (
@@ -189,7 +189,7 @@ export default async function CalendarPage({
               selectedUserId={selectedUserId}
               isAdmin={isAdmin}
               userOptions={users}
-              events={list.map((r) => ({
+              events={list.map((r: any) => ({
                 id: r.id,
                 dueAt: r.dueAt.toISOString(),
                 type: r.type,
@@ -216,7 +216,7 @@ export default async function CalendarPage({
                     <div key={date}>
                       <div className="text-xs tracking-[0.2em] uppercase text-medium-grey">{date}</div>
                       <ul className="mt-3 space-y-3">
-                        {rowsForDay.map((r) => (
+                        {rowsForDay.map((r: any) => (
                           <li key={r.id} className="rounded-lg border border-light-grey bg-cream/20 px-4 py-3">
                             <div className="flex flex-wrap items-center justify-between gap-3">
                               <div className="text-sm font-semibold text-navy">{formatDateTime(r.dueAt)}</div>
@@ -260,4 +260,5 @@ export default async function CalendarPage({
     </div>
   );
 }
+
 

@@ -12,3 +12,4 @@ export default async function GamePlayPage() {
     <GamePlayClient backHref="/game" questionnaireHomeHref="/game" requireGameSession={false} />
   );
 }
+

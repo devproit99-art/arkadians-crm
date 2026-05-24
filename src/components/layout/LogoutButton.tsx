@@ -19,3 +19,4 @@ async function doLogout() {
     window.location.href = "/login";
   }
 }
+

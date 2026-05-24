@@ -162,11 +162,11 @@ export default async function AdminPage() {
   }));
 
   const totalProspects = leadRows.length;
-  const hotProspects = leadRows.filter((l) => l.score >= 75).length;
+  const hotProspects = leadRows.filter((l: any) => l.score >= 75).length;
   const pipelineValuePkr = leadRows.reduce((acc, l) => acc + getLeadBudgetValuePkr(l), BigInt(0));
   const projectedRevenuePkr = (pipelineValuePkr * BigInt(3)) / BigInt(100); // 3% projected
   const followUpsDue = activityRows.filter((a: any) => a.status === "pending").length;
-  const viewingsBooked = leadRows.filter((l) => l.status === "viewing_booked").length;
+  const viewingsBooked = leadRows.filter((l: any) => l.status === "viewing_booked").length;
   const aiCallsLogged = callLogRows.length;
 
   const byLeadPendingActivity = new Map<string, AdminActivityRow>();
@@ -174,7 +174,7 @@ export default async function AdminPage() {
     if (!byLeadPendingActivity.has(a.leadId)) byLeadPendingActivity.set(a.leadId, a);
   }
 
-  const conversionFocus = leadRows.filter((l) => {
+  const conversionFocus = leadRows.filter((l: any) => {
     if (l.score < 75) return false;
     const hasFollowUp = byLeadPendingActivity.has(l.id);
     const hasRecentCall = l.lastCallAt ? now.getTime() - l.lastCallAt.getTime() < 1000 * 60 * 60 * 24 * 14 : false;
@@ -207,8 +207,8 @@ export default async function AdminPage() {
     .sort((a, b) => b.count - a.count)
     .slice(0, 7);
 
-  const hot = leadRows.filter((l) => l.score >= 75).length;
-  const warm = leadRows.filter((l) => l.score >= 45 && l.score <= 74).length;
+  const hot = leadRows.filter((l: any) => l.score >= 75).length;
+  const warm = leadRows.filter((l: any) => l.score >= 45 && l.score <= 74).length;
   const cold = Math.max(0, totalProspects - hot - warm);
 
   const revenueTrend = [
@@ -260,8 +260,8 @@ export default async function AdminPage() {
       };
     });
 
-  const aiBrowserCompleted = callLogRows.filter((c) => c.status === "browser_test_completed").length;
-  const transcriptsSaved = callLogRows.filter((c) => (c.transcript?.trim() ?? "").length > 0).length;
+  const aiBrowserCompleted = callLogRows.filter((c: any) => c.status === "browser_test_completed").length;
+  const transcriptsSaved = callLogRows.filter((c: any) => (c.transcript?.trim() ?? "").length > 0).length;
   const callbackTasksCreated = activityRows.filter((a: any) => a.type === "follow_up").length;
   const hotLeadsIdentified = hotProspects;
   const draftsDemo = Math.min(hotProspects, 12);
@@ -292,7 +292,7 @@ export default async function AdminPage() {
 
   const callsByAdvisor = new Map<string, AdminCallLogRow[]>();
   for (const c of callLogRows) {
-    const lead = leadRows.find((l) => l.id === c.leadId);
+    const lead = leadRows.find((l: any) => l.id === c.leadId);
     const advisor = lead ? stableAdvisorForLead(lead).advisorName : stableAdvisorForLead({ id: c.leadId, ownerId: null, ownerName: null }).advisorName;
     const arr = callsByAdvisor.get(advisor) ?? [];
     arr.push(c);
@@ -306,8 +306,8 @@ export default async function AdminPage() {
       const ownedActs = activitiesByAdvisor.get(name) ?? [];
       const ownedCalls = callsByAdvisor.get(name) ?? [];
       const pipeline = ownedLeads.reduce((acc, l) => acc + getLeadBudgetValuePkr(l), BigInt(0));
-      const hotCount = ownedLeads.filter((l) => l.score >= 75).length;
-      const viewings = ownedLeads.filter((l) => l.status === "viewing_booked").length;
+      const hotCount = ownedLeads.filter((l: any) => l.score >= 75).length;
+      const viewings = ownedLeads.filter((l: any) => l.status === "viewing_booked").length;
       const due = ownedActs.filter((a: any) => a.status === "pending").length;
       const completed = 0;
       const badge = performanceBadge({
@@ -318,7 +318,7 @@ export default async function AdminPage() {
         callsLogged: ownedCalls.length,
       });
 
-      const role = users.find((u) => u.name === name)?.role ?? "sales_rep";
+      const role = users.find((u: any) => u.name === name)?.role ?? "sales_rep";
       const prettyRole =
         role === "admin" ? "Admin" : role === "manager" ? "Sales Manager" : role === "sales_rep" ? "Property Consultant" : "Viewer";
 
@@ -461,6 +461,7 @@ export default async function AdminPage() {
     </div>
   );
 }
+
 
 
 

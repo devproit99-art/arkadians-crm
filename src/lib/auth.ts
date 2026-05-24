@@ -49,3 +49,4 @@ export async function getSession(): Promise<SessionUser | null> {
   if (!token) return null;
   return verifySessionToken(token);
 }
+

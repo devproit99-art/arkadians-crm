@@ -105,7 +105,7 @@ export function AssignedAdvisorControl({
               className="h-9 rounded-lg border border-light-grey bg-white px-3 text-xs text-navy focus:outline-none focus:ring-2 focus:ring-gold/40 disabled:opacity-60"
             >
               <option value="">Unassigned</option>
-              {advisorOptions.map((u) => (
+              {advisorOptions.map((u: any) => (
                 <option key={u.id} value={u.id}>
                   {labelFromUser(u)}
                 </option>
@@ -135,4 +135,5 @@ export function AssignedAdvisorControl({
     </div>
   );
 }
+
 

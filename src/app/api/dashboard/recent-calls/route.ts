@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json({
-      data: calls.map((c) => ({
+      data: calls.map((c: any) => ({
         id: c.id,
         leadId: c.lead.id,
         leadName: c.lead.name,
@@ -75,4 +75,5 @@ function parseTranscript(
       return { speaker: "Caller" as const, text: line };
     });
 }
+
 

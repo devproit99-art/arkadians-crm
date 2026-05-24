@@ -28,7 +28,7 @@ function looksLikePromptText(text: string): boolean {
  * Conservative: better to drop prompt text than leak it into CRM.
  */
 export function cleanBrowserTranscriptLines(lines: BrowserTranscriptLine[]): BrowserTranscriptLine[] {
-  const withoutPrompt = lines.filter((l) => {
+  const withoutPrompt = lines.filter((l: any) => {
     if (l.role !== "assistant") return true;
     return !looksLikePromptText(l.text);
   });
@@ -169,3 +169,4 @@ export function parseStoredBrowserTranscript(raw: string | null | undefined): Br
   }
   return null;
 }
+

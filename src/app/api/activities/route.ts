@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
 
     if (!hasDatabase()) {
       const now = Date.now();
-      const filtered = demoActivities.filter((a) => {
+      const filtered = demoActivities.filter((a: any) => {
         if (leadId && a.leadId !== leadId) return false;
         if (status && a.status !== status) return false;
         if (type && a.type !== type) return false;
@@ -99,7 +99,7 @@ export async function GET(req: NextRequest) {
     ]);
 
     return NextResponse.json({
-      data: activities.map((a) => ({
+      data: activities.map((a: any) => ({
         id: a.id,
         leadId: a.lead.id,
         leadName: a.lead.name,
@@ -175,4 +175,5 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
 

@@ -34,7 +34,7 @@ export async function getLeadCallLogs(leadId: string): Promise<LeadCallLogRow[]>
     },
   });
 
-  return rows.map((r) => ({
+  return rows.map((r: any) => ({
     id: r.id,
     direction: r.direction,
     status: r.status,
@@ -90,3 +90,4 @@ export async function getLatestBrowserTestForLead(leadId: string): Promise<Lates
     durationSeconds: row.durationSeconds,
   };
 }
+

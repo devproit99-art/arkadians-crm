@@ -167,7 +167,7 @@ export default async function Home({
   ]);
 
   const selectedName =
-    isAdmin && ownerId ? userOptions.find((u) => u.id === ownerId)?.name ?? session?.name ?? "Dashboard" : session?.name ?? "Dashboard";
+    isAdmin && ownerId ? userOptions.find((u: any) => u.id === ownerId)?.name ?? session?.name ?? "Dashboard" : session?.name ?? "Dashboard";
 
   const funnelChartData = [
     { stage: "New", count: pipelineCounts?.new ?? 0 },
@@ -446,3 +446,4 @@ export default async function Home({
     </div>
   );
 }
+

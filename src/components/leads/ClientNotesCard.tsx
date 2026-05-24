@@ -18,8 +18,8 @@ function buildAppendLine(noteText: string, userName: string) {
 function parseTimeline(notes: string): TimelineEntry[] {
   const lines = notes
     .split(/\r?\n/)
-    .map((l) => l.trimEnd())
-    .filter((l) => l.trim().length > 0);
+    .map((l: any) => l.trimEnd())
+    .filter((l: any) => l.trim().length > 0);
 
   if (lines.length === 0) return [];
 
@@ -48,7 +48,7 @@ function parseTimeline(notes: string): TimelineEntry[] {
   }
 
   if (current) entries.push(current);
-  return entries.filter((e) => e.body.trim().length > 0);
+  return entries.filter((e: any) => e.body.trim().length > 0);
 }
 
 export function ClientNotesCard({
@@ -162,4 +162,5 @@ export function ClientNotesCard({
     </section>
   );
 }
+
 

@@ -192,7 +192,7 @@ export async function POST(req: Request) {
               viewCategory: unit.viewCategory,
             }),
           ]
-            .filter((x) => x && x.trim().length > 0)
+            .filter((x: any) => x && x.trim().length > 0)
             .join("\n\n")
             .trim();
 
@@ -228,4 +228,5 @@ export async function POST(req: Request) {
     );
   }
 }
+
 

@@ -55,7 +55,7 @@ export default async function CeoPage() {
     }),
   ]);
 
-  const statusCount = Object.fromEntries(statusGroups.map((g) => [g.status, g._count._all])) as Record<
+  const statusCount = Object.fromEntries(statusGroups.map((g: any) => [g.status, g._count._all])) as Record<
     string,
     number
   >;
@@ -128,3 +128,4 @@ export default async function CeoPage() {
     </div>
   );
 }
+

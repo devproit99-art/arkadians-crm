@@ -129,7 +129,7 @@ export function NotificationsPanel(props: {
       body: JSON.stringify({ status: "completed", completedAt: new Date().toISOString() }),
     }).catch(() => null);
     if (!res || !res.ok) return;
-    setRows((prev) => prev.map((r) => (r.id === activityId ? { ...r, status: "completed" } : r)));
+    setRows((prev) => prev.map((r: any) => (r.id === activityId ? { ...r, status: "completed" } : r)));
   }
 
   // Reminder engine (local only)
@@ -219,7 +219,7 @@ export function NotificationsPanel(props: {
           <div className="text-sm text-medium-grey">No scheduled activities for today.</div>
         ) : (
           <ul className="space-y-3">
-            {rows.map((r) => {
+            {rows.map((r: any) => {
               const time = r.dueAt ? formatTime12(r.dueAt) : "—";
               const setting = getSetting(r.id);
               return (
@@ -291,4 +291,5 @@ export function NotificationsPanel(props: {
     </section>
   );
 }
+
 

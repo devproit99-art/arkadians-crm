@@ -223,7 +223,7 @@ export function AISalesAssistantPanel(props: {
             <div className="rounded-lg border border-light-grey bg-cream/20 p-4">
               <div className="text-xs tracking-widest uppercase text-medium-grey">Reasons</div>
               <ul className="mt-2 space-y-1 text-sm text-navy">
-                {(props.score.reasons.length ? props.score.reasons : ["No strong signals yet."]).map((r) => (
+                {(props.score.reasons.length ? props.score.reasons : ["No strong signals yet."]).map((r: any) => (
                   <li key={r} className="leading-relaxed">
                     {r}
                   </li>
@@ -248,7 +248,7 @@ export function AISalesAssistantPanel(props: {
                   onChange={(e) => setEmailTemplate(e.target.value as EmailTemplateType)}
                   className="h-9 rounded-lg border border-light-grey bg-white px-3 text-xs font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-gold/40"
                 >
-                  {EMAIL_TEMPLATES.map((t) => (
+                  {EMAIL_TEMPLATES.map((t: any) => (
                     <option key={t.id} value={t.id}>
                       {t.label}
                     </option>
@@ -307,7 +307,7 @@ export function AISalesAssistantPanel(props: {
                     onChange={(e) => setWaTemplate(e.target.value as WhatsappTemplateType)}
                     className="h-9 rounded-lg border border-light-grey bg-white px-3 text-xs font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-gold/40"
                   >
-                    {WHATSAPP_TEMPLATES.map((t) => (
+                    {WHATSAPP_TEMPLATES.map((t: any) => (
                       <option key={t.id} value={t.id}>
                         {t.label}
                       </option>
@@ -368,4 +368,5 @@ export function AISalesAssistantPanel(props: {
     </section>
   );
 }
+
 

@@ -110,3 +110,4 @@ export function mapApiLeadToPipelineLead(raw: ApiLeadListItem): PipelineLead {
     ownerLabel: raw.ownerLabel,
   };
 }
+

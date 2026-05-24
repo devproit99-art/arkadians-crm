@@ -78,7 +78,7 @@ export function ProspectIntelligenceCard(props: ProspectIntelligenceProps) {
             <p className="mt-2 text-sm text-medium-grey">Not enough data yet. Run an AI browser test.</p>
           ) : (
             <ul className="mt-3 space-y-2 text-sm text-navy">
-              {props.reasons.map((r) => (
+              {props.reasons.map((r: any) => (
                 <li key={r} className="rounded-lg border border-light-grey bg-cream/20 px-3 py-2">
                   {r}
                 </li>
@@ -171,4 +171,5 @@ export function ProspectIntelligenceCard(props: ProspectIntelligenceProps) {
     </section>
   );
 }
+
 

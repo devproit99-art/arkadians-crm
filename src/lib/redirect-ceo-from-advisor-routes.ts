@@ -6,3 +6,4 @@ export function redirectCeoFromAdvisorRoute(role: string | undefined | null) {
     redirect("/");
   }
 }
+

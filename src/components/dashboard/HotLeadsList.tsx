@@ -18,7 +18,7 @@ function scoreDot(score: number) {
 }
 
 export function HotLeadsList({ leads }: { leads: DemoLead[] }) {
-  const items: HotLead[] = leads.map((l) => ({
+  const items: HotLead[] = leads.map((l: any) => ({
     id: l.id,
     name: l.name,
     score: l.score,
@@ -88,4 +88,5 @@ export function HotLeadsList({ leads }: { leads: DemoLead[] }) {
     </section>
   );
 }
+
 

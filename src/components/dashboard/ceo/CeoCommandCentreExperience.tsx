@@ -108,7 +108,7 @@ export function CeoCommandCentreExperience({
               icon: <PieChartIcon className="w-5 h-5" />,
               delay: 210,
             },
-          ].map((s) => (
+          ].map((s: any) => (
             <MotionBlock key={s.title} reduced={reduced} delayMs={s.delay}>
               <div className="ceo-card-hover rounded-lg h-full overflow-hidden">
                 <StatCard
@@ -183,3 +183,4 @@ export function CeoCommandCentreExperience({
     </div>
   );
 }
+

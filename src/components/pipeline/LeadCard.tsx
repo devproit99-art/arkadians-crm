@@ -29,7 +29,7 @@ export function LeadCard({
       : null;
   const contact = [lead.phone, lead.email].filter(Boolean).join(" · ");
   const stageLabel =
-    PIPELINE_STAGES.find((s) => s.key === lead.stage)?.label ??
+    PIPELINE_STAGES.find((s: any) => s.key === lead.stage)?.label ??
     lead.stage.replaceAll("_", " ");
 
   // Pipeline cards are client components; session is not passed here yet, so we only show labels.
@@ -202,7 +202,7 @@ export function LeadCard({
                 className="h-9 flex-1 rounded-lg border border-light-grey bg-white px-3 text-xs text-navy focus:outline-none focus:ring-2 focus:ring-gold/40 disabled:opacity-60"
               >
                 <option value="">Unassigned</option>
-                {advisorOptions.map((u) => (
+                {advisorOptions.map((u: any) => (
                   <option key={u.id} value={u.id}>
                     {u.name}
                   </option>
@@ -224,3 +224,4 @@ export function LeadCard({
     </div>
   );
 }
+

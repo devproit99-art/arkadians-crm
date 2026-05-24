@@ -105,11 +105,12 @@ export function deriveClientProgress(input: {
                   : "Qualify lead and schedule callback.";
 
   const latestSignal =
-    (notes.split(/\r?\n/).map((l) => l.trim()).filter(Boolean).slice(-1)[0] ?? "") ||
+    (notes.split(/\r?\n/).map((l: any) => l.trim()).filter(Boolean).slice(-1)[0] ?? "") ||
     input.latestActivityTitle ||
     input.latestCallSummary ||
     "";
 
   return { stage, paymentStatus, flags, nextAction, latestSignal: latestSignal || null };
 }
+
 

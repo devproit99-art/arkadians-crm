@@ -237,7 +237,7 @@ function getTimeZoneParts(timeZone: string, date: Date) {
     hour12: false,
   });
   const parts = dtf.formatToParts(date);
-  const get = (type: string) => parts.find((p) => p.type === type)?.value;
+  const get = (type: string) => parts.find((p: any) => p.type === type)?.value;
   return {
     year: Number(get("year")),
     month: Number(get("month")),
@@ -394,7 +394,7 @@ function extractConfirmedName(lines: BrowserTranscriptLine[], existingLead?: Lea
     if (!candidate) continue;
 
     // Look for a yes/no response
-    const next = lines.slice(i + 1, i + 4).find((x) => x.role === "prospect");
+    const next = lines.slice(i + 1, i + 4).find((x: any) => x.role === "prospect");
     if (!next) continue;
     if (looksYes(next.text)) {
       // If we already have a good lead name, prefer it (confirmation).
@@ -462,7 +462,7 @@ export function extractLeadDetailsFromTranscript(
           return { role: role === "assistant" ? "assistant" : "prospect", text } as BrowserTranscriptLine;
         });
 
-  const fullText = lines.map((l) => l.text).join(" ");
+  const fullText = lines.map((l: any) => l.text).join(" ");
 
   const confirmedName = extractConfirmedName(lines, existingLead);
   const unitDetected = detectPreferredUnitFromText(fullText);
@@ -518,4 +518,5 @@ export function extractLeadDetailsFromTranscript(
 function normalizeKey(v: string): string {
   return v.trim().toLowerCase().replace(/\s+/g, "_");
 }
+
 

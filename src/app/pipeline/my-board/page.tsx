@@ -64,10 +64,10 @@ export default async function MyBoardPage({
   const boardKey =
     initialLeads.length === 0
       ? `empty_${ownerId}`
-      : `${ownerId}_${initialLeads.map((l) => l.id).sort().join("|")}`;
+      : `${ownerId}_${initialLeads.map((l: any) => l.id).sort().join("|")}`;
 
   const ownerName =
-    (isAdmin ? users.find((u) => u.id === ownerId)?.name : session.name) ?? "My";
+    (isAdmin ? users.find((u: any) => u.id === ownerId)?.name : session.name) ?? "My";
 
   return (
     <div className="px-5 sm:px-8 py-8">
@@ -108,7 +108,7 @@ export default async function MyBoardPage({
           <div className="mt-6 rounded-xl border border-light-grey bg-white shadow-card p-5">
             <div className="text-xs tracking-[0.2em] uppercase text-medium-grey">View board for</div>
             <div className="mt-3 flex flex-wrap gap-2">
-              {users.map((u) => (
+              {users.map((u: any) => (
                 <Link
                   key={u.id}
                   href={`/pipeline/my-board?ownerId=${encodeURIComponent(u.id)}`}
@@ -139,4 +139,5 @@ export default async function MyBoardPage({
     </div>
   );
 }
+
 

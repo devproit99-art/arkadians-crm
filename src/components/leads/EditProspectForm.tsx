@@ -245,7 +245,7 @@ export function EditProspectForm({ lead }: { lead: LeadEditModel }) {
           <label className="block">
             <span className="text-xs tracking-[0.2em] uppercase text-medium-grey">Source</span>
             <select className={fieldClass} value={source} onChange={(e) => setSource(e.target.value)} disabled={fieldDisabled}>
-              {SOURCES.map((s) => (
+              {SOURCES.map((s: any) => (
                 <option key={s.value} value={s.value}>
                   {s.label}
                 </option>
@@ -256,7 +256,7 @@ export function EditProspectForm({ lead }: { lead: LeadEditModel }) {
           <label className="block">
             <span className="text-xs tracking-[0.2em] uppercase text-medium-grey">Status</span>
             <select className={fieldClass} value={status} onChange={(e) => setStatus(e.target.value)} disabled={fieldDisabled}>
-              {STATUSES.map((s) => (
+              {STATUSES.map((s: any) => (
                 <option key={s.value} value={s.value}>
                   {s.label}
                 </option>
@@ -272,7 +272,7 @@ export function EditProspectForm({ lead }: { lead: LeadEditModel }) {
               onChange={(e) => setUrgency(e.target.value as UrgencyValue)}
               disabled={fieldDisabled}
             >
-              {URGENCY_OPTIONS.map((u) => (
+              {URGENCY_OPTIONS.map((u: any) => (
                 <option key={u.value} value={u.value}>
                   {u.label}
                 </option>
@@ -306,7 +306,7 @@ export function EditProspectForm({ lead }: { lead: LeadEditModel }) {
           <label className="block">
             <span className="text-xs tracking-[0.2em] uppercase text-medium-grey">Unit preference</span>
             <select className={fieldClass} value={preferredUnit} onChange={(e) => setPreferredUnit(e.target.value)} disabled={fieldDisabled}>
-              {UNITS.map((u) => (
+              {UNITS.map((u: any) => (
                 <option key={u.value === "" ? "__empty" : u.value} value={u.value}>
                   {u.label}
                 </option>
@@ -317,7 +317,7 @@ export function EditProspectForm({ lead }: { lead: LeadEditModel }) {
           <label className="block">
             <span className="text-xs tracking-[0.2em] uppercase text-medium-grey">View preference</span>
             <select className={fieldClass} value={preferredView} onChange={(e) => setPreferredView(e.target.value)} disabled={fieldDisabled}>
-              {VIEWS.map((v) => (
+              {VIEWS.map((v: any) => (
                 <option key={v.value === "" ? "__empty" : v.value} value={v.value}>
                   {v.label}
                 </option>
@@ -357,4 +357,5 @@ export function EditProspectForm({ lead }: { lead: LeadEditModel }) {
     </div>
   );
 }
+
 

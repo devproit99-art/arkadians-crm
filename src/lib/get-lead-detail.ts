@@ -69,3 +69,4 @@ export async function getLeadDetailById(id: string): Promise<DemoLead | null> {
     updatedAtLabel: formatDateTime(lead.updatedAt),
   };
 }
+

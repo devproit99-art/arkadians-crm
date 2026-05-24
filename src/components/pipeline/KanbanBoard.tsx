@@ -289,3 +289,4 @@ export function KanbanBoard({ initialLeads, leadsUrl, sessionUserId, sessionRole
     </div>
   );
 }
+
