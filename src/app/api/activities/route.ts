@@ -41,9 +41,9 @@ export async function GET(req: NextRequest) {
         : undefined;
 
     const typeParam = searchParams.get("type");
-    const type: ActivityType | undefined =
-      typeParam && (Object.values(ActivityType) as string[]).includes(typeParam)
-        ? (typeParam as ActivityType)
+    const type: string | undefined =
+      typeParam && (['task','call','email','whatsapp','viewing','meeting','note','follow_up']).includes(typeParam)
+        ? (typeParam)
         : undefined;
 
     const page = Math.max(1, Number(searchParams.get("page") ?? 1));
