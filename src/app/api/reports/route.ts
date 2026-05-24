@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
             where: { status: "closed_won", deletedAt: null },
             select: { id: true },
           },
-          calls: { select: { id: true } },
+          
         },
       });
 
@@ -57,7 +57,7 @@ export async function GET(req: NextRequest) {
           closedDeals: user.leads.length,
           totalLeads: user._count.leads,
           totalActivities: user._count.activities,
-          totalCalls: user.calls.length,
+          totalCalls: 0,
         })),
       });
     }
@@ -137,3 +137,4 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
