@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { demoActivities, type DemoActivity } from "@/lib/demo-data";
-import { ActivityStatus, ActivityType, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 const createActivitySchema = z.object({
   leadId: z.string().min(1),
