@@ -152,7 +152,7 @@ export default async function AdminPage() {
     }),
   );
 
-  const callLogRows: AdminCallLogRow[] = callLogs.map((c) => ({
+  const callLogRows: AdminCallLogRow[] = callLogs.map((c: any) => ({
     id: c.id,
     leadId: c.leadId,
     status: c.status,
@@ -221,7 +221,7 @@ export default async function AdminPage() {
     .slice()
     .sort((a, b) => b.score - a.score)
     .slice(0, 8)
-    .map((l) => {
+    .map((l: any) => {
       const pending = byLeadPendingActivity.get(l.id) ?? null;
       const hasCallback = Boolean(pending?.dueAt);
       return {
@@ -249,7 +249,7 @@ export default async function AdminPage() {
     .slice()
     .sort((a, b) => b.score - a.score)
     .slice(0, 10)
-    .map((l) => {
+    .map((l: any) => {
       const bookingStatus = deriveBookingStatus(l);
       const paidStatus = derivePaidStatus(bookingStatus);
       return {
@@ -272,7 +272,7 @@ export default async function AdminPage() {
     select: { id: true, name: true, role: true },
     take: 20,
   });
-  const userById = new Map(users.map((u) => [u.id, u]));
+  const userById = new Map(users.map((u: any) => [u.id, u]));
 
   const leadsByAdvisor = new Map<string, AdminLeadRow[]>();
   for (const l of leadRows) {
@@ -336,7 +336,7 @@ export default async function AdminPage() {
     })
     .sort((a, b) => Number((b.pipeline - a.pipeline) / BigInt(1_000_000)));
 
-  const advisorPipelineChart = advisorRows.slice(0, 6).map((r) => ({
+  const advisorPipelineChart = advisorRows.slice(0, 6).map((r: any) => ({
     label: r.name.split(" ")[0] ?? r.name,
     valueCrore: Number(r.pipeline / BigInt(10_000_000)),
   }));
@@ -355,7 +355,7 @@ export default async function AdminPage() {
     }))
     .sort((a, b) => b.pipelineCrore - a.pipelineCrore);
 
-  const sourcesChart = sourcePerformance.map((s) => ({
+  const sourcesChart = sourcePerformance.map((s: any) => ({
     source: s.source.replaceAll("_", " "),
     count: s.count,
     avgScore: s.avgScore,
@@ -367,7 +367,7 @@ export default async function AdminPage() {
     { bucket: "Cold" as const, count: cold },
   ];
 
-  const revenueTrendChart = revenueTrend.map((d) => ({
+  const revenueTrendChart = revenueTrend.map((d: any) => ({
     label: d.label,
     valueCrore: Number(projectedRevenuePkr / BigInt(10_000_000)) * (d.value / 3.0),
   }));
@@ -383,7 +383,7 @@ export default async function AdminPage() {
     { title: "Conversion Focus", value: String(conversionFocus), badge: "Hot + callback", tone: "gold" as const },
   ];
 
-  const topHotRows = topHot.map((r) => {
+  const topHotRows = topHot.map((r: any) => {
     const pending = byLeadPendingActivity.get(r.lead.id) ?? null;
     return {
       id: r.lead.id,
@@ -408,7 +408,7 @@ export default async function AdminPage() {
     ownerLabel: a.userName ?? a.advisor ?? null,
   }));
 
-  const bookingRows = bookingSnapshot.map((r) => ({
+  const bookingRows = bookingSnapshot.map((r: any) => ({
     id: r.lead.id,
     client: r.lead.name,
     interest: getLeadInterest(r.lead),
@@ -418,7 +418,7 @@ export default async function AdminPage() {
     nextStep: r.next,
   }));
 
-  const teamRows = advisorRows.map((r) => ({
+  const teamRows = advisorRows.map((r: any) => ({
     name: r.name,
     role: r.role,
     assigned: r.assigned,
@@ -461,6 +461,7 @@ export default async function AdminPage() {
     </div>
   );
 }
+
 
 
 
