@@ -202,7 +202,7 @@ export function CeoPipelineStackedStrip({ counts }: { counts: PipelineCountsPlai
           {keys.map((k: any) => (
             <span key={k.key} className="inline-flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-sm" style={{ background: k.fill }} aria-hidden />
-              {k.label}: <span className="font-medium text-navy tabular-nums">{row[k.key]}</span>
+              {k.label}: <span className="font-medium text-navy tabular-nums">{(row as any)[k.key]}</span>
             </span>
           ))}
         </div>
