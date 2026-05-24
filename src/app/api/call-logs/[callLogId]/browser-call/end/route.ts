@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { ActivityStatus, ActivityType, CallLogDirection, LeadStatus, Priority, UnitType, Urgency } from "@prisma/client";
+
 import { prisma } from "@/lib/prisma";
 import {
   cleanBrowserTranscriptLines,

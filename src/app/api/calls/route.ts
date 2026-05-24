@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { demoCalls, type DemoCall } from "@/lib/demo-data";
-import { Prisma, Sentiment } from "@prisma/client";
+
 
 function hasDatabase() {
   return Boolean(process.env.DATABASE_URL);
