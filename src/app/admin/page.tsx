@@ -276,7 +276,7 @@ export default async function AdminPage() {
 
   const leadsByAdvisor = new Map<string, AdminLeadRow[]>();
   for (const l of leadRows) {
-    const advisor = l.ownerId && userById.get(l.ownerId)?.name ? userById.get(l.ownerId)!.name : stableAdvisorForLead(l).advisorName;
+    const advisor = l.ownerId && (userById.get(l.ownerId) as any)?.name ? userById.get(l.ownerId)!.name : stableAdvisorForLead(l).advisorName;
     const arr = leadsByAdvisor.get(advisor) ?? [];
     arr.push(l);
     leadsByAdvisor.set(advisor, arr);
@@ -461,6 +461,7 @@ export default async function AdminPage() {
     </div>
   );
 }
+
 
 
 
